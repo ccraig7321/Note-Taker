@@ -53,13 +53,12 @@ The final step the user can complete in the application is the deleting notes th
 <br><br>
 ___
 
-### Links for GitHub and Video Guide
+### Links for Heroku Deployment and GitHubDeployment
 <br>
-https://github.com/ccraig7321/Team-Profile-Generator
+https://dashboard.heroku.com/apps/note-taker7
 <br><br>
 
-https://drive.google.com/file/d/1X0YvBXcun7t_IDxDVWLbcbJP2BDq5Wih/view
-___
+
 
 ### License
 
