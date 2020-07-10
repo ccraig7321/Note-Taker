@@ -2,12 +2,7 @@ var express = require("express");
 var path = require("path");
 var fs = require("fs");
 var bodyParser = require("body-parser");
-// var mysql = require("mysql");
-// var request = require("request");
-// var Sequelize = require("sequelize");
-// var Twitter = requi'twitter');
-// var nodemailer = require('nodemailer');
-// var db = require("./models");
+// var {v1 as uuidv1} = require("uuid");
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +20,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/notes", (req, res) => {
+  const noteData = req.body
+  noteData.id = Math.floor(Math.random() * 1000)
   console.log(req.body)
   fs.readFile("./db/db.json", function(err, data){
     if(err){
@@ -52,33 +49,31 @@ app.get("/api/notes", (req, res) => {
   })
 })
 
-// app.delete("/api/notes/note", (req, res) => {
-//   var note = req.body.id;
-  // res.send('Got a DELETE request at /user')
+app.delete("/api/notes/:id", (req, res) => {
+  var id = req.params.id;
 
-  // fs.readFile("./db/db.json", (err) => {
-  //   if (err) throw err;
+  fs.readFile("./db/db.json", function(err, data){
+    if(err){
+      throw err;
+    }
+    const originalData = [].concat(JSON.parse(data))
 
-  //   const deletedNote = res.json(JSON.parse(data))
-
-  //   console.log("You successfully deleted your note");
-  // })
-
-//   fs.readFile("./db/db.json", "utf8", (err, data) => {
-//     if (err) throw err;
-
-//     const allNotes = JSON.parse(data);
-//     const newAllNotes = allNotes.filter(note => note.id != noteId);
-
-//     fs.writeFile("./db/db.json", JSON.stringify(newAllNotes, null, 2), err => {
-//       if (err) throw err;
-//       res.send(201);
-//       console.log("Your note has been deleted")
-//     });
-//   });
-// });
-
-// });
+    const filterData = originalData.filter(function(data){
+      return data.id == id;
+      // if(data.id == id){
+      //   return false
+      // }
+      // return true
+    })
+    console.log(filterData)
+    fs.writeFile("./db/db.json", JSON.stringify(filterData), function(err){
+      if(err){
+        throw err;
+      };
+      res.send(201)
+    });
+  })
+});
 
 
 app.listen(PORT, () => {

@@ -55,9 +55,10 @@ ___
 
 ### Links for Heroku Deployment and GitHubDeployment
 <br>
-https://dashboard.heroku.com/apps/note-taker7
+Heroku: https://note-taker7.herokuapp.com/
 <br><br>
-
+GitHub: https://ccraig7321.github.io/Note-Taker/
+<br><br>
 
 
 ### License
